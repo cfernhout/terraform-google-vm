@@ -134,15 +134,19 @@ variable "auto_delete" {
 }
 
 variable "additional_disks" {
-  description = "List of maps of additional disks. See https://www.terraform.io/docs/providers/google/r/compute_instance_template#disk_name"
+  description = "List of maps of additional disks. See https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance_template#auto_delete"
   type = list(object({
-    disk_name    = string
-    device_name  = string
-    auto_delete  = bool
-    boot         = bool
-    disk_size_gb = number
-    disk_type    = string
-    disk_labels  = map(string)
+    auto_delete  = optional(bool)
+    boot         = optional(bool)
+    device_name  = optional(string)
+    disk_name    = optional(string)
+    source_image = optional(string)
+    interface    = optional(string)
+    mode         = optional(string)
+    disk_type    = optional(string)
+    disk_size_gb = optional(number)
+    disk_labels  = optional(map(string))
+    source       = optional(string)
   }))
   default = []
 }
